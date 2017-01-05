@@ -12,7 +12,7 @@ describe('Stack', () => {
   })
 
   context('push()', () => {
-    it('pushes an element to the top of the stack.', () => {
+    it('pushes an element into the stack.', () => {
       const aStack = new Stack()
 
       expect(() => aStack.push('foo'))
@@ -27,7 +27,6 @@ describe('Stack', () => {
       expect(() => aStack[0]
         .to.equal('foo'))
     })
-
   })
 
   context('pop()', () => {
@@ -63,7 +62,10 @@ describe('Stack', () => {
 
   context ('length()', () => {
     it('shows the length of the stack.', () => {
-
+      const aStack = new Stack()
+      aStack.push('ber')
+      expect(aStack.length())
+        .to.equal(1)
     })
   })
 })
