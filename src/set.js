@@ -5,16 +5,16 @@ export default class set {
 
   constructor( aSet=[] ) {
     this.top = 0
-    this.element = aSet
+    this.elements = aSet
   }
 
 
   add(element) {
     let count = 0
-    this.element[this.top++] = element
+    this.elements[this.top++] = element
     for
     ( let i = 0; i <= this.top; i++ ) {
-      if ( this.element[i] === element ) {
+      if ( this.elements[i] === element ) {
         count++
       }
       if ( count >= 1 ) {
@@ -29,7 +29,7 @@ export default class set {
 
   contains(element){
 
-    if( this.element.includes(element) ) {
+    if( this.elements.includes(element) ) {
       return true
     } else {
       return false
@@ -37,15 +37,32 @@ export default class set {
   }
 
   remove( element ) {
-    let position = this.element.indexOf(element)
-    this.element.splice( position, 1 )
+    let position = this.elements.indexOf(element)
+    this.elements.splice( position, 1 )
     this.top--
   }
+
+  forEach(callback) {
+    this.elements = this.elements.map(callback)
+    return this.elements
+  }
+
+  size() {
+    return this.top
+  }
+
+  difference(set1, set2) {
+  let setDifference = [];
+
+  for (let i = 0; i < set1.elements.length; i++)  {
+    if (set2.elements.indexOf(set1.elements[i]) === -1) {
+      setDifference.push(set1.elements[i]);
+    }
+  }
+  return setDifference;
 }
 
-//   set.remove('C')          // removes an element (if it exists) from the set.
-//   set.forEach(elem => console.log(elem))  // takes a callback function and passes it each element in sequence.
-//   set.size()               // returns the number of elements in the set.
+}
 //   set.union(otherSet)      // unions the set with another set and returns the resulting set.
 //   set.intersect(otherSet)  // intersects the set with another set and returns the resulting set.
 //   set.difference(otherSet) // returns a set that contains the elements found in the set but not in otherSet.

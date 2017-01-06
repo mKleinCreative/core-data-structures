@@ -45,6 +45,17 @@ describe.only('set', () => {
     })
   })
 
+  context ('size()', () => {
+    it('shows the current sets size.', () => {
+      const aSet = new set()
+      aSet.add('A', null)
+      aSet.add('b', null)
+      aSet.add('c', null)
+      expect(aSet.size())
+      .to.equal(3)
+    })
+  })
+
   context ( 'add()', () => {
     it( 'Adds an element to the front of the current set.', () => {
       const aSet = new set()
@@ -82,16 +93,42 @@ describe.only('set', () => {
       aSet.add('junk')
       aSet.add('things')
       aSet.add('stuff')
-      console.log(';otj', aSet );
       expect(() => aSet.remove('stuff'))
         .to.alter(() => aSet.top, { from: 3, to: 2 })
-      console.log(';otj', aSet );
+    })
+  })
+
+  context('foreach', () => {
+    it('takes a callback function and passes it each element in sequence', () => {
+      let addOne = ( element ) => {
+        return element + 1
+      }
+
+      const aSet = new set()
+      aSet.add( 1 )
+      aSet.add( 2 )
+      aSet.add( 3 )
+      //console.log('the things', aSet.forEach( addOne ))
+
+      const results = aSet.forEach( addOne )
+      expect(results)
+        .to.deep.equal([2, 3, 4])
+    })
+   })
+
+  context('difference()', () => {
+    it(' compares two sets and returns the unique values from the first set.', () => {
+      const aSet = new set([1, 2, 3])
+      const bSet = new set([2, 3, 4])
+      const results = aSet.difference(aSet, bSet)
+
+      expect(results)
+        .to.deep.equal([1])
     })
   })
 
 })
 
-  // set.remove('C')          // removes an element (if it exists) from the set.
   // set.forEach(elem => console.log(elem))  // takes a callback function and passes it each element in sequence.
   // set.size()               // returns the number of elements in the set.
   // set.union(otherSet)      // unions the set with another set and returns the resulting set.
