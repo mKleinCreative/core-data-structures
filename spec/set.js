@@ -127,12 +127,71 @@ describe.only('set', () => {
     })
   })
 
+  context('union()', () => {
+    it('Joins two sets together without duplication.', () => {
+      const aSet = new set([1, 2, 3])
+      const bSet = new set([2, 3, 4])
+      const results = aSet.union( bSet )
+
+      expect( aSet.union( bSet ).members() )
+        .to.deep.equal([1, 2, 3, 4])
+    })
+  })
+
+
+
+  context ('subset()', () => {
+    it('returns true if the set is a subset of otherSet ', () => {
+      const aSet = new set()
+      const bSet = new set()
+
+      aSet.add('A', null)
+      aSet.add('b', null)
+      aSet.add('c', null)
+
+      bSet.add('b', null)
+      bSet.add('c', null)
+      expect(bSet.subset(aSet))
+        .to.equal(true)
+    })
+    it('returns false if the set is not a subset of otherSet.', () => {
+      const aSet = new set()
+      const bSet = new set()
+
+      bSet.add('qq', null)
+
+      aSet.add('A', null)
+      aSet.add('b', null)
+      aSet.add('c', null)
+      expect(bSet.subset(aSet))
+        .to.equal(false)
+    })
+  })
+
+  context ('intersection()', () => {
+      it(' compares two sets and returns the values that are the same from the  sets.', () => {
+        const aSet = new set([1, 2, 3])
+        const bSet = new set([2, 3, 4])
+        const results = aSet.intersection(aSet, bSet)
+
+        expect(results)
+          .to.deep.equal([2, 3])
+      })
+  })
+
+  context ('clone()', () => {
+      it('returns a cloned set.', () => {
+        const aSet = new set([1, 2, 3])
+        const results = aSet.clone()
+
+        expect(results)
+          .to.deep.equal([1, 2, 3])
+      })
+  })
+
 })
 
-  // set.forEach(elem => console.log(elem))  // takes a callback function and passes it each element in sequence.
-  // set.size()               // returns the number of elements in the set.
-  // set.union(otherSet)      // unions the set with another set and returns the resulting set.
+
   // set.intersect(otherSet)  // intersects the set with another set and returns the resulting set.
-  // set.difference(otherSet) // returns a set that contains the elements found in the set but not in otherSet.
-  // set.isSubset(otherSet)   // returns true if the set is a subset of otherSet or false if not.
+
   // set.clone()              // returns a cloned set.

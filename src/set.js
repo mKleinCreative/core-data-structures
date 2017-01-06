@@ -59,12 +59,55 @@ export default class set {
       setDifference.push(set1.elements[i]);
     }
   }
-  return setDifference;
-}
+    return setDifference;
+  }
+
+  members() {
+    return [ ...this.elements ]
+  }
+
+  union( otherSet ) {
+    const unionElements = [ ...this.elements ]
+    otherSet.members().forEach( element => {
+      if( ! unionElements.includes( element ) ) {
+        unionElements.push( element )
+      }
+    })
+
+    // return a new set created from those elements
+    return new set([ ...unionElements ])
+  }
+
+  intersection (set1, set2) {
+
+    let setIntersection = [];
+
+    for (let i = 0; i < set1.elements.length; i++)  {
+      if (set2.elements.indexOf(set1.elements[i]) !== -1) {
+        setIntersection.push(set1.elements[i]);
+      }
+    }
+    return setIntersection;
+  }
+
+  subset(things){
+    let result
+    for (let i = 0; i < this.elements.length; i++)  {
+      if (things.elements.find((element) => element === this.elements[i])) {
+        result = true
+      } else {
+        result = false
+        break
+      }
+    }
+    return result
+  }
+
+  clone(newSet){
+     for (var i = 0; i < elements.length; i++) {
+         newSet.add(elements[i]);
+     }
+     return newSet;
+  }
 
 }
-//   set.union(otherSet)      // unions the set with another set and returns the resulting set.
-//   set.intersect(otherSet)  // intersects the set with another set and returns the resulting set.
-//   set.difference(otherSet) // returns a set that contains the elements found in the set but not in otherSet.
-//   set.isSubset(otherSet)   // returns true if the set is a subset of otherSet or false if not.
-//   set.clone()              // returns a cloned set.
