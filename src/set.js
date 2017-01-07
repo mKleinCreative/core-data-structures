@@ -103,11 +103,12 @@ export default class set {
     return result
   }
 
-  clone(newSet){
-     for (var i = 0; i < elements.length; i++) {
-         newSet.add(elements[i]);
-     }
-     return newSet;
+  clone(){
+    const newSet = new set()
+    for (var i = 0; i < this.elements.length; i++) {
+      newSet.add(this.elements[i]);
+    }
+    return newSet;
   }
 
 }

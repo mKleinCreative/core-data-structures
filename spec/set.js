@@ -182,9 +182,9 @@ describe.only('set', () => {
   context ('clone()', () => {
       it('returns a cloned set.', () => {
         const aSet = new set([1, 2, 3])
-        const results = aSet.clone()
+        const clonedSet = aSet.clone()
 
-        expect(results)
+        expect(clonedSet.elements)
           .to.deep.equal([1, 2, 3])
       })
   })
